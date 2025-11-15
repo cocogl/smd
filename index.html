@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>Link up</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at top, #1f2933, #020617);
+            color: #e5e7eb;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1080px;
+            width: 100%;
+            padding: 2rem;
+        }
+        .site-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            margin-bottom: 1rem;
+        }
+        .switch-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.8rem;
+        }
+        .switch-label {
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+        .toggle {
+            position: relative;
+            width: 64px;
+            height: 32px;
+        }
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #0f172a;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.9);
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 24px;
+            width: 24px;
+            left: 4px;
+            top: 3px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.7);
+            transition: transform 0.2s ease;
+        }
+        input:checked + .slider {
+            background-color: #0f172a;
+        }
+        input:checked + .slider:before {
+            transform: translateX(28px);
+            background-color: #3b82f6;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
+        }
+        .lectures-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+        }
+        .card {
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 0.9rem;
+            overflow: hidden;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+            cursor: pointer;
+        }
+        .thumb {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(15, 23, 42, 0.9);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .info {
+            padding: 0.9rem 1rem 1.1rem;
+        }
+        .title {
+            font-size: 1rem;
+            margin-bottom: 0.35rem;
+        }
+        .meta {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            margin-bottom: 0.45rem;
+        }
+        .desc {
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="site-title">Link up</div>
+        <div class="switch-row">
+            <span class="switch-label">온라인</span>
+            <label class="toggle">
+                <input type="checkbox" id="modeToggle" />
+                <span class="slider"></span>
+            </label>
+            <span class="switch-label">오프라인</span>
+            <span id="modeStatus" class="switch-label" style="margin-left:0.5rem; color:#22c55e;">온라인 모드</span>
+        </div>
+
+        <div class="lectures-grid">
+            <!-- 온라인 모드에서만 보이는 실시간 수업 카드 -->
+            <div id="onlineCard" class="card">
+                <div class="thumb" style="background: linear-gradient(135deg, #22c55e, #16a34a);">실시간 온라인 수업</div>
+                <div class="info">
+                    <div class="title">온라인 수업 입장하기</div>
+                    <div class="meta"> </div>
+                    <div class="desc">이 카드를 클릭하면 수업에 입장합니다.</div>
+                </div>
+                <!-- 숨겨진 폼: 카드 클릭 시 projection_mapper.py 실행 -->
+                <form action="/launch/class-a" method="post" id="onlineForm" style="display:none;"></form>
+            </div>
+
+            <!-- 오프라인 VOD 카드들 (온라인/오프라인 모드 모두에서 보이게 할 수도 있지만, 여기선 오프라인 모드에서만) -->
+            <div class="card offline-card" data-url="https://youtu.be/QSLuheKYFWo?si=lGcM6zIqXJKDtjB7">
+                <div class="thumb" style="background: linear-gradient(135deg, #0ea5e9, #6366f1);">해커톤</div>
+                <div class="info">
+                    <div class="title">해커톤 기초 이해</div>
+                    <div class="meta">길이 31초 · 난이도: 입문</div>
+                    <div class="desc">해커톤을 설명합니다.</div>
+                </div>
+            </div>
+            <div class="card offline-card" data-url="https://example.com/science2">
+                <div class="thumb" style="background: linear-gradient(135deg, #22c55e, #16a34a);">통합 과학2</div>
+                <div class="info">
+                    <div class="title">중화 반응 소개</div>
+                    <div class="meta">길이 18분 · 난이도: 초급</div>
+                    <div class="desc">중화 반응에 대한 기초 개념을 다룹니다.</div>
+                </div>
+            </div>
+            <div class="card offline-card" data-url="https://example.com/korean2">
+                <div class="thumb" style="background: linear-gradient(135deg, #f97316, #ec4899);">공통 국어2</div>
+                <div class="info">
+                    <div class="title">중세 국어 복습하기</div>
+                    <div class="meta">길이 25분 · 난이도: 초급</div>
+                    <div class="desc">중세 국어를 복습하는 시간입니다.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modeToggle = document.getElementById('modeToggle');
+        const modeStatus = document.getElementById('modeStatus');
+        const onlineCard = document.getElementById('onlineCard');
+        const onlineForm = document.getElementById('onlineForm');
+        const offlineCards = document.querySelectorAll('.offline-card');
+
+        function updateMode() {
+            if (modeToggle.checked) {
+                // 오프라인 모드: 온라인 카드 숨기고, 오프라인 카드만 보이게
+                onlineCard.style.display = 'none';
+                offlineCards.forEach(card => {
+                    card.style.display = 'block';
+                });
+                modeStatus.textContent = '오프라인 모드';
+                modeStatus.style.color = '#3b82f6';
+            } else {
+                // 온라인 모드: 온라인 카드만 보이고, 오프라인 카드 숨김
+                onlineCard.style.display = 'block';
+                offlineCards.forEach(card => {
+                    card.style.display = 'none';
+                });
+                modeStatus.textContent = '온라인 모드';
+                modeStatus.style.color = '#22c55e';
+            }
+        }
+
+        // 온라인 카드 클릭 시 projection_mapper.py 실행 (온라인 모드일 때만)
+        onlineCard.addEventListener('click', () => {
+            if (!modeToggle.checked) {
+                onlineForm.submit();
+            }
+        });
+
+        // 오프라인 카드 클릭 시 각자 지정된 링크로 이동 (오프라인 모드일 때만)
+        offlineCards.forEach(card => {
+            card.addEventListener('click', () => {
+                if (modeToggle.checked) {
+                    const url = card.getAttribute('data-url');
+                    if (url) {
+                        window.location.href = url;
+                    }
+                }
+            });
+        });
+
+        modeToggle.addEventListener('change', updateMode);
+        // 초기 상태: 온라인 모드
+        updateMode();
+    </script>
+</body>
+</html>

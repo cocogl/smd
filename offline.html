@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>오프라인 강의</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #020617;
+            color: #e5e7eb;
+        }
+        header {
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+            background: rgba(15, 23, 42, 0.98);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .logo {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1.5rem 1.5rem 2.5rem;
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.25rem;
+        }
+        .subtitle {
+            color: #9ca3af;
+            margin-bottom: 1.5rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+        }
+        .video-card {
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 0.9rem;
+            overflow: hidden;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+        }
+        .thumb {
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(15, 23, 42, 0.9);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        .info {
+            padding: 0.9rem 1rem 1rem;
+        }
+        .title {
+            font-size: 1rem;
+            margin-bottom: 0.35rem;
+        }
+        .meta {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            margin-bottom: 0.5rem;
+        }
+        .desc {
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+        a.back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: #9ca3af;
+            font-size: 0.9rem;
+            text-decoration: none;
+            margin-bottom: 1rem;
+        }
+        a.back-link:hover {
+            color: #e5e7eb;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">수업 플랫폼</div>
+    </header>
+    <div class="container">
+        <a href="/" class="back-link">← 모드 선택으로 돌아가기</a>
+        <h1>오프라인 강의</h1>
+        <p class="subtitle">유튜브 느낌으로 구성된 강의 목록입니다. 실제로는 유튜브 링크나 동영상 플레이어를 연결할 수 있습니다.</p>
+        <div class="grid">
+            <div class="video-card">
+                <div class="thumb">기초 1강</div>
+                <div class="info">
+                    <div class="title">프로젝션 매핑 기초 이해</div>
+                    <div class="meta">길이 12분 · 난이도: 입문</div>
+                    <div class="desc">프로젝션 매핑이 무엇인지, 수업에서 어떻게 활용되는지 개념을 설명합니다.</div>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="thumb">기초 2강</div>
+                <div class="info">
+                    <div class="title">카메라 캘리브레이션 소개</div>
+                    <div class="meta">길이 18분 · 난이도: 초급</div>
+                    <div class="desc">카메라 좌표계와 프로젝터 좌표계에 대한 기초 개념을 다룹니다.</div>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="thumb">실습 1강</div>
+                <div class="info">
+                    <div class="title">간단한 매핑 실습 따라하기</div>
+                    <div class="meta">길이 25분 · 난이도: 초급</div>
+                    <div class="desc">실제 화면을 보면서, 가장 기본적인 네 점 매핑을 따라 해볼 수 있는 실습 영상입니다.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
